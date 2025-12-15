@@ -7,11 +7,20 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "ng lint --fix"
   },
   "prettier": {
-    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
     "singleQuote": true,
+    "semi": true,
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "trailingComma": "es5",
+    "bracketSameLine": true,
+    "printWidth": 120,
+    "endOfLine": "lf",
     "overrides": [
       {
         "files": "*.html",
@@ -39,7 +48,12 @@
     "@angular/compiler-cli": "^21.0.0",
     "angular-eslint": "21.1.0",
     "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.3.0",
     "jsdom": "^27.1.0",
+    "prettier": "3.7.4",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.47.0",
     "vitest": "^4.0.8"
