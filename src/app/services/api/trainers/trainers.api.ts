@@ -40,7 +40,26 @@ export class TrainersApi {
             map((pokemons): TrainerWithTeam => ({ ...trainer, team: pokemons }))
           )
       ),
-      toArray()
+      toArray(),
+      map(trainersWithTeam => [...trainersWithTeam].sort((t1, t2) => t1.id - t2.id))
     );
   }
+
+  // getAllWithTeam2(): Observable<TrainerWithTeam[]> {
+  //   forkJoin({
+  //     trainers: this.getAll(),
+  //     pokemons: this.pokemonsApi.getAll(),
+  //   }).pipe(
+  //     map(({ trainers, pokemons }) => trainers),
+  //     concatAll(),
+  //     mergeMap(
+  //       (trainer): Observable<TeamDTO> =>
+  //         this.teamsApi
+  //           .get(trainer.id)
+  //           .pipe
+  //           ///
+  //           ()
+  //     )
+  //   );
+  // }
 }

@@ -12,6 +12,10 @@ export class PokemonsApi {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.apiBaseUrl + '/pokemons';
 
+  public getAll(): Observable<PokemonDTO[]> {
+    return this.http.get<PokemonDTO[]>(`${this.baseUrl}`);
+  }
+
   public get(id: number): Observable<PokemonDTO> {
     return this.http.get<PokemonDTO>(`${this.baseUrl}/${id}`);
   }
