@@ -1,0 +1,6 @@
+<h1>Quel dresseur est-tu ?</h1>
+
+@for (trainer of trainers(); track trainer.id) {
+  <app-user-card [trainer]="trainer"></app-user-card>
+}
+
