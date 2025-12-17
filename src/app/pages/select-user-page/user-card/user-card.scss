@@ -16,5 +16,7 @@
 
 .user-description {
   text-align: justify;
-  min-height: 150px;
+  height: 150px;
+  overflow: scroll;
+  text-overflow: ellipsis;
 }

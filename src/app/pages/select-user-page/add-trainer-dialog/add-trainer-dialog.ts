@@ -1,28 +1,46 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { Field, form } from '@angular/forms/signals';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Field, form, submit } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
-import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { firstValueFrom } from 'rxjs';
 
-import { CreateTrainerDTO } from '../../../services/api/trainers/trainerDTO';
+import { trainerLevels } from '../../../services/api/trainers/trainer-levels';
+import { TrainersApi } from '../../../services/api/trainers/trainers.api';
+import { addTrainerModel, addTrainerSchema } from './add-trainer-dialog.form';
 
 @Component({
   selector: 'app-add-trainer-dialog',
-  imports: [MatDialogTitle, MatDialogContent, MatLabel, MatDialogActions, MatFormField, MatInput, MatButton, Field],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatLabel,
+    MatDialogActions,
+    MatFormField,
+    MatInput,
+    MatButton,
+    Field,
+    MatSelect,
+    MatOption,
+    MatError,
+  ],
   templateUrl: './add-trainer-dialog.html',
   styleUrl: './add-trainer-dialog.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddTrainerDialog {
-  addTrainerModel = signal<Required<CreateTrainerDTO>>({
-    name: '',
-    avatarUrl: '',
-    age: 0,
-    description: '',
-    level: 'beginner',
-    favoritePokemon: 0,
-    hometown: '',
-  });
+  protected readonly trainerLevels = trainerLevels;
+  private readonly trainersApi = inject(TrainersApi);
 
-  protected addTrainerForm = form(this.addTrainerModel);
+  protected addTrainerForm = form(addTrainerModel, addTrainerSchema);
+
+  protected async submitForm(event: SubmitEvent) {
+    event.preventDefault();
+
+    await submit(this.addTrainerForm, async form => {
+      const newTrainer = form().value();
+      await firstValueFrom(this.trainersApi.add(newTrainer));
+    });
+  }
 }
