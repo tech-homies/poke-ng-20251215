@@ -7,4 +7,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './pokemons-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PokemonsPage {}
+export default class PokemonsPage {}

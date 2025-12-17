@@ -1,6 +1,12 @@
-<h1>Quel dresseur est-tu ?</h1>
-
-@for (trainer of trainers(); track trainer.id) {
-  <app-user-card [trainer]="trainer"></app-user-card>
+<h1 class="title">Choisi ton dresseur 🚀</h1>
+@let users = users$ | async;
+@if (users) {
+  <div class="users">
+    @for (user of users; track user.id) {
+      <app-user-card [user]="user" />
+    }
+  </div>
+  <div class="actions">
+    <button mat-stroked-button type="button">Ajouter un nouveau dresseur</button>
+  </div>
 }
-

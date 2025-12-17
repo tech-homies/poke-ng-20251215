@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { SelectUserPage } from './select-user-page';
+import SelectUserPage from './select-user-page';
 
 describe('SelectUserPage', () => {
   let component: SelectUserPage;
@@ -8,9 +7,8 @@ describe('SelectUserPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectUserPage]
-    })
-    .compileComponents();
+      imports: [SelectUserPage],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SelectUserPage);
     component = fixture.componentInstance;

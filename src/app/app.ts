@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, effect, signal, untracked } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { SelectUserPage } from './pages/select-user-page/select-user-page';
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SelectUserPage],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

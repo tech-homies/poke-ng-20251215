@@ -1,23 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 
-import { TrainerWithTeam } from '../../services/api/trainers/trainer-with-team';
 import { TrainersApi } from '../../services/api/trainers/trainers.api';
 import { UserCard } from './user-card/user-card';
 
 @Component({
   selector: 'app-select-user-page',
-  imports: [UserCard],
+  imports: [UserCard, MatButton, AsyncPipe],
   templateUrl: './select-user-page.html',
   styleUrl: './select-user-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectUserPage implements OnInit {
-  private readonly trainersApi = inject(TrainersApi);
-  protected readonly trainers = signal<TrainerWithTeam[]>([]);
+export default class SelectUserPage {
+  readonly #trainersApi = inject(TrainersApi);
 
-  ngOnInit(): void {
-    this.trainersApi.getAllWithTeam().subscribe(trainers => {
-      this.trainers.set(trainers);
-    });
-  }
+  readonly users$ = this.#trainersApi.getAll();
 }

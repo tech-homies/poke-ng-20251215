@@ -1,7 +1,17 @@
 :host {
-  h1 {
-    background-color: blue;
-  }
-  display: block;
-  background-color: red;
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.users {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.title, .actions {
+  grid-column: 1 / -1;
+  text-align: center;
 }
