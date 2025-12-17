@@ -1,8 +1,10 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TrainersApi } from '../../services/api/trainers/trainers.api';
+import { AddTrainerDialog } from './add-trainer-dialog/add-trainer-dialog';
 import { UserCard } from './user-card/user-card';
 
 @Component({
@@ -13,7 +15,12 @@ import { UserCard } from './user-card/user-card';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SelectUserPage {
-  readonly #trainersApi = inject(TrainersApi);
+  private readonly trainersApi = inject(TrainersApi);
+  private readonly dialog = inject(MatDialog);
 
-  readonly users$ = this.#trainersApi.getAll();
+  readonly users$ = this.trainersApi.getAll();
+
+  openAddTrainerDialog() {
+    this.dialog.open(AddTrainerDialog);
+  }
 }
