@@ -1,9 +1,32 @@
 <h2 mat-dialog-title>✨ Nouveau Dresseur</h2>
 <mat-dialog-content>
-  <mat-form-field appearance="outline">
-    <mat-label>Nom</mat-label>
-    <input matInput />
-  </mat-form-field>
+  <p>Remplissez les informations du nouveau dresseur :</p>
+  <div class="trainer-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput [field]="addTrainerForm.name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Niveau</mat-label>
+      <input matInput [field]="addTrainerForm.level" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Avatar</mat-label>
+      <input matInput [field]="addTrainerForm.avatarUrl" type="url" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="8" [field]="addTrainerForm.description"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Age</mat-label>
+      <input matInput type="number" [field]="addTrainerForm.age" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ville</mat-label>
+      <input matInput [field]="addTrainerForm.hometown" />
+    </mat-form-field>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button matButton>Annuler</button>

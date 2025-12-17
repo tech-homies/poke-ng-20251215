@@ -8,9 +8,8 @@ describe('AddTrainerDialog', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddTrainerDialog]
-    })
-    .compileComponents();
+      imports: [AddTrainerDialog],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddTrainerDialog);
     component = fixture.componentInstance;

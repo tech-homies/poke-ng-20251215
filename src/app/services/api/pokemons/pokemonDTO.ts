@@ -56,7 +56,7 @@ export interface Resistance {
 export interface Evolution {
   pre: Pre[];
   next: Next[];
-  mega: any[];
+  mega: unknown[];
 }
 
 export interface Pre {
