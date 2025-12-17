@@ -3,6 +3,7 @@ import { Field, form, submit } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { firstValueFrom } from 'rxjs';
 
@@ -24,6 +25,7 @@ import { addTrainerModel, addTrainerSchema } from './add-trainer-dialog.form';
     MatSelect,
     MatOption,
     MatError,
+    MatProgressBar,
   ],
   templateUrl: './add-trainer-dialog.html',
   styleUrl: './add-trainer-dialog.scss',
@@ -33,12 +35,12 @@ export class AddTrainerDialog {
   protected readonly trainerLevels = trainerLevels;
   private readonly trainersApi = inject(TrainersApi);
 
-  protected addTrainerForm = form(addTrainerModel, addTrainerSchema);
+  protected form = form(addTrainerModel, addTrainerSchema);
 
   protected async submitForm(event: SubmitEvent) {
     event.preventDefault();
 
-    await submit(this.addTrainerForm, async form => {
+    await submit(this.form, async form => {
       const newTrainer = form().value();
       await firstValueFrom(this.trainersApi.add(newTrainer));
     });

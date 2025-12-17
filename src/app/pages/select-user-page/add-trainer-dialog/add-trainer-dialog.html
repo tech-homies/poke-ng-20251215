@@ -5,37 +5,50 @@
     <div class="trainer-form">
       <mat-form-field appearance="outline">
         <mat-label>Nom</mat-label>
-        <input matInput [field]="addTrainerForm.name" />
-        <mat-error>{{ addTrainerForm.name().errors()[0]?.message }}</mat-error>
+        <input matInput [field]="form.name" />
+        <mat-error>{{ form.name().errors()[0]?.message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Niveau</mat-label>
-        <mat-select [field]="addTrainerForm.level">
+        <mat-select [field]="form.level">
           @for (level of trainerLevels; track level.value) {
             <mat-option [value]="level.value">{{ level.label }}</mat-option>
           }
         </mat-select>
+        <mat-error>{{ form.level().errors()[0]?.message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Avatar</mat-label>
-        <input matInput [field]="addTrainerForm.avatarUrl" type="url" />
+        <input matInput [field]="form.avatarUrl" type="url" />
+        <mat-error>{{ form.avatarUrl().errors()[0]?.message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea matInput rows="8" [field]="addTrainerForm.description"></textarea>
+        <textarea matInput rows="8" [field]="form.description"></textarea>
+        <mat-error>{{ form.description().errors()[0]?.message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Age</mat-label>
-        <input matInput type="number" [field]="addTrainerForm.age" />
+        <input matInput type="number" [field]="form.age" />
+        <mat-error>{{ form.age().errors()[0]?.message }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Ville</mat-label>
-        <input matInput [field]="addTrainerForm.hometown" />
+        <input matInput [field]="form.hometown" />
+        <mat-error>{{ form.hometown().errors()[0]?.message }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Pokémon Favori</mat-label>
+        <input matInput type="number" [field]="form.favoritePokemon" />
+        <mat-error>{{ form.favoritePokemon().errors()[0]?.message }}</mat-error>
+        @if (form.favoritePokemon().pending()) {
+          <mat-progress-bar mode="indeterminate" />
+        }
       </mat-form-field>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button matButton type="button">Annuler</button>
-    <button matButton="filled" type="submit" [disabled]="addTrainerForm().invalid()">Ajouter</button>
+    <button matButton="filled" type="submit" [disabled]="form().invalid() || form().pending()">Ajouter</button>
   </mat-dialog-actions>
 </form>
