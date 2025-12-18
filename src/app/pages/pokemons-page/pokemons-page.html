@@ -1,5 +1,13 @@
 <h2>Team</h2>
-xxx (x3)
+<ul>
+  @for (pokemon of teamPokemons(); track pokemon.pokedex_id) {
+    <li>
+      <img [alt]="pokemon.name" [src]="pokemon.sprites.regular" width="50" height="50" />
+      <span>{{ pokemon.pokedex_id }} - {{ pokemon.name.fr }} ({{ pokemon.types[0] }})</span>
+      <button type="button" matButton (click)="removeFromTeam(pokemon)">Retirer</button>
+    </li>
+  }
+</ul>
 
 <h2>Pokémons</h2>
 <ul>
