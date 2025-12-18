@@ -15,4 +15,11 @@ export class TeamsApi {
   public get(trainerId: number): Observable<TeamDTO> {
     return this.http.get<TeamDTO>(`${this.baseUrl}/${trainerId}/team`);
   }
+
+  public updateTeam(trainerId: number, team: number[]): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/${trainerId}/team`, {
+      trainerId,
+      pokemons: team,
+    });
+  }
 }

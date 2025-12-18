@@ -1,9 +1,10 @@
 <h1>Dresseurs</h1>
-<ul>
+<ul class="trainer-list">
   @for (trainer of trainers(); track trainer.id) {
-    <li>
+    <li class="trainer-item">
+      <img src="{{ trainer.avatarUrl }}" alt="{{ trainer.name }}" width="30" height="30" class="avatar" />
       <span>{{ trainer.name }} </span>
-      <a [routerLink]="['/app/trainers', trainer.id, 'battles']">Stats</a>
+      <a matButton [routerLink]="['/app/trainers', trainer.id, 'battles']">Stats</a>
     </li>
   }
 </ul>

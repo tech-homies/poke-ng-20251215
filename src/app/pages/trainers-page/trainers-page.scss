@@ -1,0 +1,15 @@
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.trainer-list {
+  list-style-type: none;
+  padding: 0;
+
+  .trainer-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,10 @@
+h1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
+}

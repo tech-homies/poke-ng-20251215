@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, Component, inject, input, numberAttribute, OnI
 
 import { BattleDTO } from '../../services/api/battles/battleDTO';
 import { BattlesApi } from '../../services/api/battles/battles-api.service';
+import { TrainerDTO } from '../../services/api/trainers/trainerDTO';
+import { TrainersApi } from '../../services/api/trainers/trainers.api';
 
 @Component({
   selector: 'app-trainer-battles-page',
@@ -14,9 +16,14 @@ import { BattlesApi } from '../../services/api/battles/battles-api.service';
 export default class TrainerBattlesPage implements OnInit {
   public readonly id = input.required({ transform: numberAttribute });
   private readonly battlesApi = inject(BattlesApi);
+  private readonly trainerApi = inject(TrainersApi);
   public readonly battles = signal<BattleDTO[]>([]);
+  public readonly trainer = signal<TrainerDTO | null>(null);
 
   ngOnInit(): void {
+    this.trainerApi.get(this.id()).subscribe(trainer => {
+      this.trainer.set(trainer);
+    });
     this.battlesApi.getByTrainer(this.id()).subscribe(battles => {
       this.battles.set(battles);
     });

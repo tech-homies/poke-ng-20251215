@@ -1,1 +1,13 @@
-<p>ranking-page works!</p>
+<h1>🎖️ Classement des dresseurs</h1>
+
+<ul>
+  @for (trainer of trainers(); track trainer.id) {
+    <li class="trainer-card">
+      #{{ trainer.rank }} -
+      {{ trainer.name }} -
+      {{ trainer.points }}pts -
+      (✅: {{ trainer.wins }} /
+      ❌: {{ trainer.losses }})
+    </li>
+  }
+</ul>

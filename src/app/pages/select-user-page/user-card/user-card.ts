@@ -42,6 +42,6 @@ export class UserCard {
 
   selectTrainer(): void {
     this.userStore.login(this.user());
-    this.router.navigate(['/app/pokemons']);
+    this.router.navigate(['/app/trainers']);
   }
 }

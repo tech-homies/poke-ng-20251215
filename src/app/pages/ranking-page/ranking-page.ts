@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+import { TrainersApi } from '../../services/api/trainers/trainers.api';
 
 @Component({
   selector: 'app-ranking-page',
@@ -7,4 +10,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './ranking-page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class RankingPage {}
+export default class RankingPage {
+  private readonly trainersApi = inject(TrainersApi);
+  public readonly trainers = toSignal(this.trainersApi.getAllWithRank());
+}

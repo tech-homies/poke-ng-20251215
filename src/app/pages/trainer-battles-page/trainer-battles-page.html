@@ -1,5 +1,13 @@
-<p>trainer-battles-page works!</p>
-
-<h1>{{ id() }}</h1>
+<h1>
+  <img
+    src="{{ trainer()?.avatarUrl }}"
+    alt="{{ trainer()?.name }}"
+    width="50"
+    height="50"
+    class="avatar"
+  />
+  Combats de
+  {{ trainer()?.name }}
+</h1>
 
 <pre>{{ battles() | json }}</pre>

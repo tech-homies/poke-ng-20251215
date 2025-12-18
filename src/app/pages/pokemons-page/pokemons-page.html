@@ -1,1 +1,14 @@
-<p>pokemons-page works!</p>
+<h2>Team</h2>
+xxx (x3)
+
+<h2>Pokémons</h2>
+<ul>
+  @for (pokemon of pokemons(); track pokemon.pokedex_id) {
+    <li>
+      <img [alt]="pokemon.name" [src]="pokemon.sprites.regular" width="50" height="50" />
+      <span>{{ pokemon.pokedex_id }} - {{ pokemon.name.fr }} ({{ pokemon.types[0] }})</span>
+      <button type="button" matButton (click)="addToTeam(pokemon)">Ajouter à l'équipe</button>
+    </li>
+  }
+</ul>
+

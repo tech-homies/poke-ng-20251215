@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { PokemonDTO } from './pokemonDTO';
@@ -13,7 +13,9 @@ export class PokemonsApi {
   private readonly baseUrl = environment.apiBaseUrl + '/pokemons';
 
   public getAll(): Observable<PokemonDTO[]> {
-    return this.http.get<PokemonDTO[]>(`${this.baseUrl}`);
+    return this.http
+      .get<PokemonDTO[]>(`${this.baseUrl}`)
+      .pipe(map(pokemons => [...pokemons].sort((a, b) => a.pokedex_id - b.pokedex_id)));
   }
 
   public get(id: number): Observable<PokemonDTO> {
