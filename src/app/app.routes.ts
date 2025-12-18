@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 
+import { authGuard } from './shared/guards/auth-guard';
+
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./pages/select-user-page/select-user-page') },
   {
     path: 'app',
     loadComponent: () => import('./layout/layout'),
+    canActivateChild: [authGuard],
     children: [
       { path: 'pokemons', loadComponent: () => import('./pages/pokemons-page/pokemons-page') },
       { path: 'ranking', loadComponent: () => import('./pages/ranking-page/ranking-page') },
@@ -15,4 +18,5 @@ export const routes: Routes = [
       },
     ],
   },
+  { path: '**', redirectTo: '' },
 ];
