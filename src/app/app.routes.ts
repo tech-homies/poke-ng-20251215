@@ -7,7 +7,7 @@ export const routes: Routes = [
   {
     path: 'app',
     loadComponent: () => import('./layout/layout'),
-    canActivateChild: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: 'pokemons', loadComponent: () => import('./pages/pokemons-page/pokemons-page') },
       { path: 'ranking', loadComponent: () => import('./pages/ranking-page/ranking-page') },

@@ -1,9 +1,9 @@
 import { inject } from '@angular/core';
-import { CanActivateChildFn, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 
 import { UserStore } from '../../services/stores/user.store';
 
-export const authGuard: CanActivateChildFn = () => {
+export const authGuard: CanActivateFn = () => {
   const user = inject(UserStore).user();
   return user ? true : inject(Router).createUrlTree(['/']);
 };
