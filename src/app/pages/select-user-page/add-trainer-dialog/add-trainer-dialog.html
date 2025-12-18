@@ -48,7 +48,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button matButton type="button">Annuler</button>
+    <button matButton type="button" mat-dialog-close>Annuler</button>
     <button matButton="filled" type="submit" [disabled]="form().invalid() || form().pending()">Ajouter</button>
   </mat-dialog-actions>
 </form>

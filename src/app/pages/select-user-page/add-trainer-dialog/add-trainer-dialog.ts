@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Field, form, submit } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
-import { MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatOption, MatSelect } from '@angular/material/select';
@@ -26,6 +32,7 @@ import { addTrainerModel, addTrainerSchema } from './add-trainer-dialog.form';
     MatOption,
     MatError,
     MatProgressBar,
+    MatDialogClose,
   ],
   templateUrl: './add-trainer-dialog.html',
   styleUrl: './add-trainer-dialog.scss',
@@ -34,6 +41,7 @@ import { addTrainerModel, addTrainerSchema } from './add-trainer-dialog.form';
 export class AddTrainerDialog {
   protected readonly trainerLevels = trainerLevels;
   private readonly trainersApi = inject(TrainersApi);
+  private readonly dialogRef = inject(MatDialogRef<AddTrainerDialog>);
 
   protected form = form(addTrainerModel, addTrainerSchema);
 
@@ -42,7 +50,8 @@ export class AddTrainerDialog {
 
     await submit(this.form, async form => {
       const newTrainer = form().value();
-      await firstValueFrom(this.trainersApi.add(newTrainer));
+      const createdTrainer = await firstValueFrom(this.trainersApi.add(newTrainer));
+      this.dialogRef.close(createdTrainer);
     });
   }
 }
