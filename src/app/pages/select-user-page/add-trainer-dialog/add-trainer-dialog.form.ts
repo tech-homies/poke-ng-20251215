@@ -1,5 +1,5 @@
 import { signal } from '@angular/core';
-import { debounce, minLength, required, schema, validate, validateHttp } from '@angular/forms/signals';
+import { debounce, max, min, minLength, required, schema, validate, validateHttp } from '@angular/forms/signals';
 
 import { environment } from '../../../../environments/environment';
 import { CreateTrainerDTO } from '../../../services/api/trainers/trainerDTO';
@@ -7,16 +7,24 @@ import { CreateTrainerDTO } from '../../../services/api/trainers/trainerDTO';
 export const addTrainerModel = signal<Required<CreateTrainerDTO>>({
   name: '',
   avatarUrl: '',
-  age: 0,
+  age: NaN,
   description: '',
   level: 'beginner',
-  favoritePokemon: 0,
+  favoritePokemon: NaN,
   hometown: '',
 });
 
 export const addTrainerSchema = schema<Required<CreateTrainerDTO>>(schemaPath => {
   required(schemaPath.name, { message: 'Le nom est requis' });
   minLength(schemaPath.name, 2, { message: 'Le nom doit contenir au moins 2 caractères' });
+  required(schemaPath.level, { message: 'Le niveau est requis' });
+  required(schemaPath.avatarUrl, { message: "L'URL de l'avatar est requise" });
+  required(schemaPath.description, { message: 'La description est requise' });
+  required(schemaPath.age, { message: "L'âge est requis" });
+  min(schemaPath.age, 5, { message: "L'âge minimum est de 5 ans" });
+  max(schemaPath.age, 5000, { message: "L'âge maximum est de 5000 ans" });
+  required(schemaPath.hometown, { message: 'La ville natale est requise' });
+  min(schemaPath.favoritePokemon, 1, { message: 'Le Pokédex ID doit être au moins 1' });
 
   // L'age doit être au minimum le nombre de caractères du nom.
   validate(schemaPath.age, ctx => {
@@ -34,7 +42,7 @@ export const addTrainerSchema = schema<Required<CreateTrainerDTO>>(schemaPath =>
   // Il faut valider que le numéro de pokémon favori existe.
   debounce(schemaPath.favoritePokemon, 400);
   validateHttp(schemaPath.favoritePokemon, {
-    request: ({ value }) => `${environment.apiBaseUrl}/pokemons/${value()}`,
+    request: ({ value }) => (value() ? `${environment.apiBaseUrl}/pokemons/${value()}` : undefined),
     onSuccess: () => null,
     onError: () => ({
       kind: 'pokemonNotFound',
