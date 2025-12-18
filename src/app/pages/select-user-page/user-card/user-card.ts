@@ -14,6 +14,7 @@ import {
 import { Router } from '@angular/router';
 
 import { TrainerDTO } from '../../../services/api/trainers/trainerDTO';
+import { UserStore } from '../../../services/stores/user.store';
 
 @Component({
   selector: 'app-user-card',
@@ -35,10 +36,12 @@ import { TrainerDTO } from '../../../services/api/trainers/trainerDTO';
 })
 export class UserCard {
   private readonly router = inject(Router);
+  private readonly userStore = inject(UserStore);
 
   readonly user = input.required<TrainerDTO>();
 
   selectTrainer(): void {
+    this.userStore.login(this.user());
     this.router.navigate(['/app/pokemons']);
   }
 }

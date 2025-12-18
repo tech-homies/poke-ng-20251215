@@ -22,6 +22,10 @@
         </button>
       }
       <span>poke-ng</span>
+      @if (user(); as currentUser) {
+        <span class="spacer"></span>
+        <span><app-header-user [user]="currentUser" /></span>
+      }
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

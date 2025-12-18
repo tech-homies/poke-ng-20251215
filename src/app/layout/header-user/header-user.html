@@ -1,0 +1,9 @@
+<button matButton [matMenuTriggerFor]="menu">
+  <div class="button">
+    <img [ngSrc]="user().avatarUrl" height="32" width="32" [alt]="'Avatar of ' + user().name" class="avatar" />
+    {{ user().name }}
+  </div>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="logout()">Logout</button>
+</mat-menu>

@@ -10,6 +10,9 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
+import { UserStore } from '../services/stores/user.store';
+import { HeaderUser } from './header-user/header-user';
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.html',
@@ -23,10 +26,13 @@ import { map, shareReplay } from 'rxjs/operators';
     AsyncPipe,
     RouterOutlet,
     RouterLink,
+    HeaderUser,
   ],
 })
 export default class Layout {
-  private breakpointObserver = inject(BreakpointObserver);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly userStore = inject(UserStore);
+  protected readonly user = this.userStore.user;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(result => result.matches),
