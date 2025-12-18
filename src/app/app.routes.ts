@@ -7,8 +7,8 @@ export const routes: Routes = [
     loadComponent: () => import('./layout/layout'),
     children: [
       { path: 'pokemons', loadComponent: () => import('./pages/pokemons-page/pokemons-page') },
-      // { path: 'ranking' },
-      // { path: '...' },
+      { path: 'ranking', loadComponent: () => import('./pages/ranking-page/ranking-page') },
+      { path: 'trainers', loadComponent: () => import('./pages/trainers-page/trainers-page') },
     ],
   },
 ];
