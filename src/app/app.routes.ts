@@ -9,6 +9,10 @@ export const routes: Routes = [
       { path: 'pokemons', loadComponent: () => import('./pages/pokemons-page/pokemons-page') },
       { path: 'ranking', loadComponent: () => import('./pages/ranking-page/ranking-page') },
       { path: 'trainers', loadComponent: () => import('./pages/trainers-page/trainers-page') },
+      {
+        path: 'trainers/:id/battles',
+        loadComponent: () => import('./pages/trainer-battles-page/trainer-battles-page'),
+      },
     ],
   },
 ];

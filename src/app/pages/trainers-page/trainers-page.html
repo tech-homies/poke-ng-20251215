@@ -1,1 +1,9 @@
-<p>trainers-page works!</p>
+<h1>Dresseurs</h1>
+<ul>
+  @for (trainer of trainers(); track trainer.id) {
+    <li>
+      <span>{{ trainer.name }} </span>
+      <a [routerLink]="['/app/trainers', trainer.id, 'battles']">Stats</a>
+    </li>
+  }
+</ul>

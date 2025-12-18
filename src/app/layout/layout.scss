@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .sidenav-container {
   height: 100%;
 }
@@ -18,4 +20,10 @@
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.active {
+  @include mat.list-overrides((
+    list-item-container-color: orange,
+  ));
 }
