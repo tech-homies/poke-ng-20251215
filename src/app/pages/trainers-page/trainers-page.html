@@ -5,6 +5,7 @@
       <img src="{{ trainer.avatarUrl }}" alt="{{ trainer.name }}" width="30" height="30" class="avatar" />
       <span>{{ trainer.name }} </span>
       <a matButton [routerLink]="['/app/trainers', trainer.id, 'battles']">Stats</a>
+      <button matButton (click)="fight(trainer)">Combat !</button>
     </li>
   }
 </ul>

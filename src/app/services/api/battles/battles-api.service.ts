@@ -19,4 +19,8 @@ export class BattlesApi {
   getByTrainer(trainerId: number): Observable<BattleDTO[]> {
     return this.http.get<BattleDTO[]>(`${this.baseUrl}`, { params: { trainerId } });
   }
+
+  startBattleWithTrainer(trainer1Id: number, trainer2Id: number): Observable<BattleDTO> {
+    return this.http.post<BattleDTO>(`${this.baseUrl}`, { trainer1Id, trainer2Id });
+  }
 }

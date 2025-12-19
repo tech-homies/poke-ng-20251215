@@ -13,9 +13,10 @@ export class PokemonsApi {
   private readonly baseUrl = environment.apiBaseUrl + '/pokemons';
 
   public getAll(): Observable<PokemonDTO[]> {
-    return this.http
-      .get<PokemonDTO[]>(`${this.baseUrl}`)
-      .pipe(map(pokemons => [...pokemons].sort((a, b) => a.pokedex_id - b.pokedex_id)));
+    return this.http.get<PokemonDTO[]>(`${this.baseUrl}`).pipe(
+      map(pokemons => [...pokemons].filter(p => p.pokedex_id !== 0)), // Remove missingno
+      map(pokemons => [...pokemons].sort((a, b) => a.pokedex_id - b.pokedex_id))
+    );
   }
 
   public get(id: number): Observable<PokemonDTO> {

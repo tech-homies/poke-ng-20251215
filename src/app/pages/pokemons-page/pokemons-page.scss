@@ -1,0 +1,15 @@
+.sprite {
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.pokemon-list {
+  list-style-type: none;
+  padding: 0;
+
+  .pokemon-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
