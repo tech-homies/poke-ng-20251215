@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, signal, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,22 +8,4 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected readonly title = signal('poke-ng');
-  protected readonly priceHT = signal(20);
-  protected readonly priceTTC = computed(() => this.priceHT() * 1.2);
-
-  private logPriceChange = effect(() => {
-    console.log(`Price TTC updated: ${this.priceTTC()}`);
-    console.log(untracked(() => this.priceHT()));
-  });
-
-  constructor() {
-    setTimeout(() => {
-      this.title.set('poke-ng! UPDATED');
-      this.title.update(actualValue => actualValue + '!!!');
-
-      this.priceHT.set(30);
-    }, 1000);
-  }
-}
+export class App {}
